@@ -3,27 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Vierlingsbräu</title>
+    <link rel="icon" href="logo.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap">
+
 </head>
 <body>
 
 <header>
+
     <nav>
         <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about_us.html">Über uns</a></li>
-        <li><a href="our_beers.html">Unsere Biere</a></li>
-        <li><a href="contact.html">Kontakt</a></li>
-        <li><a href="shop.html">Shop</a></li>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#beers">Unsere Biere</a></li>
         </ul>
     </nav>
 </header>
-<h1>Vierlingsbräu</h1>
-<p>Willkommen auf der Website der Hobbybrauerei Vierlingsbräu</p>
-<p>Wir sind eine kleine Hobbybrauerei aus dem schönen Jagsttal und brauen seit 2023 unser eigenes Bier in privaten Rahmen.</p>
-<p>Unsere Biere sind alle handgemacht und werden mit viel Liebe und Sorgfalt gebraut.</p>
-<p>Wir wünschen viel Spaß beim Stöbern auf unserer Website und freuen uns über jede Nachricht!</p>
-<p>Prost!</p>
-<p>Die Vierlinge</p>
 
+<section id="home">
+    <h1>Vierlingsbräu</h1>
+    <p>Willkommen auf der Website der Hobbybrauerei Vierlingsbräu! Wir sind eine kleine Hobbybrauerei aus dem schönen Jagsttal und brauen seit 2023 unser eigenes Bier in privaten Rahmen. Unsere Biere sind alle handgemacht und werden mit viel Liebe und Sorgfalt gebraut.
+        Wir wünschen viel Spaß beim Stöbern auf unserer Website und freuen uns über jede Nachricht!</p>
+    <p>Prost! Die Vierlinge</p>
+</section>
+
+<section id="beers">
+    <h2>Unsere Biere</h2>
+    <img id="openPopup" src="iv_one.jpeg" alt="Klick mich!" width="150px">
+</section>
+
+
+<section id="tools">
+    <h2>Nützliche Tools</h2>
+    <p>Wir haben hier ein paar nützliche Tools für euch zusammengestellt, die euch beim Brauen helfen können.</p>
+    <p>Bald.</p>
+    <div id="popup">
+        <h2>IV.1</h2>
+        <p> Unsere Eins. Ein Helles. Kaltgehopft. </p>
+        <img src="iv_one.jpeg" width="250px" alt="Klick mich!">
+        <p>Alkoholgehalt: 5.0%</p>
+        <p>Stammwürze: 11.5°</p>
+        <button id="closePopup">X</button>
+    </div>
+
+</section>
+
+<footer>
+    <p>Impressum</p>
+</footer>
+
+
+<script src="script.js"></script>
 </body>
 </html>

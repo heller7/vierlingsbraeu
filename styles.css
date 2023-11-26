@@ -1,0 +1,74 @@
+header {
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+nav ul {
+    list-style: none;
+    padding: 10;
+    display: flex; /* Zeigt die Listenelemente in einer Zeile an */
+    justify-content: center; /* Zentriert die Listenelemente horizontal */
+}
+
+nav li {
+    margin: 0 10px; /* Füge Abstand zwischen den Listenelementen hinzu */
+}
+
+nav a {
+    color: #333;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #555;
+}
+
+body {
+    font-family: 'roboto', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0 25% 0 25%;
+    padding: 10;
+}
+
+h1 {
+    color: #333;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 72px;
+}
+
+h2 {
+    color: #333;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 36px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }

@@ -1,61 +1,124 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vierlingsbräu</title>
     <link rel="icon" href="logo.ico" type="image/x-icon">
     <link rel="shortcut icon" href="logo.ico" type="image/x-icon">
-    <link rel="stylesheet" href="styles.css">
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap">
-
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'shadows': ['"Shadows Into Light"', 'cursive'],
+                    },
+                    colors: {
+                        'light-green': {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                    },
+                }
+            }
+        }
+    </script>
 </head>
-<body>
+<body class="bg-light-green-50 text-light-green-900">
+    <header class="bg-light-green-700 text-light-green-50 fixed w-full z-10">
+        <nav class="container mx-auto px-4 py-4">
+            <ul class="flex justify-center space-x-6">
+                <li><a href="#home" class="hover:text-light-green-200 transition duration-300">Home</a></li>
+                <li><a href="#beers" class="hover:text-light-green-200 transition duration-300">Unsere Biere</a></li>
+                <li><a href="#tools" class="hover:text-light-green-200 transition duration-300">Tools</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<header>
+    <main class="pt-16">
+        <section id="home" class="min-h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('brewery-bg.jpg');">
+            <div class="bg-light-green-800 bg-opacity-70 p-8 rounded-lg text-center">
+                <h1 class="text-6xl font-shadows text-light-green-50 mb-4">Vierlingsbräu</h1>
+                <p class="text-xl text-light-green-50 max-w-2xl">Willkommen auf der Website der Hobbybrauerei Vierlingsbräu! Wir sind eine kleine Hobbybrauerei aus dem schönen Jagsttal und brauen seit 2023 unser eigenes Bier in privaten Rahmen. Unsere Biere sind alle handgemacht und werden mit viel Liebe und Sorgfalt gebraut.</p>
+                <p class="text-2xl font-shadows text-light-green-200 mt-4">Prost! Die Vierlinge</p>
+            </div>
+        </section>
 
-    <nav>
-        <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#tools">Tools</a></li>
-        <li><a href="#beers">Unsere Biere</a></li>
-        </ul>
-    </nav>
-</header>
+        <section id="beers" class="py-16 bg-light-green-100">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-shadows text-center mb-8">Unsere Biere</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="beer-card" data-beer-id="1">
+                        <img src="iv_one.jpeg" alt="IV.1" class="w-full h-64 object-cover rounded-t-lg cursor-pointer">
+                        <div class="p-4 bg-light-green-200 rounded-b-lg">
+                            <h3 class="text-2xl font-bold mb-2">IV.1</h3>
+                            <p>Ein Helles. Kaltgehopft.</p>
+                        </div>
+                    </div>
+                    <div class="beer-card" data-beer-id="2">
+                        <img src="iv_two.jpeg" alt="IV.2" class="w-full h-64 object-cover rounded-t-lg cursor-pointer">
+                        <div class="p-4 bg-light-green-200 rounded-b-lg">
+                            <h3 class="text-2xl font-bold mb-2">IV.2</h3>
+                            <p>Ein Dunkles. Malzig und Vollmundig.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<section id="home">
-    <h1>Vierlingsbräu</h1>
-    <p>Willkommen auf der Website der Hobbybrauerei Vierlingsbräu! Wir sind eine kleine Hobbybrauerei aus dem schönen Jagsttal und brauen seit 2023 unser eigenes Bier in privaten Rahmen. Unsere Biere sind alle handgemacht und werden mit viel Liebe und Sorgfalt gebraut.
-        Wir wünschen viel Spaß beim Stöbern auf unserer Website und freuen uns über jede Nachricht!</p>
-    <p>Prost! Die Vierlinge</p>
-</section>
+        <section id="tools" class="py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-shadows text-center mb-8">Nützliche Tools</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-light-green-200 p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-4">Alkoholgehalt Rechner</h3>
+                        <div class="mb-4">
+                            <label for="og" class="block mb-2">Stammwürze (°P):</label>
+                            <input type="number" id="og" class="w-full p-2 rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label for="fg" class="block mb-2">Restextrakt (°P):</label>
+                            <input type="number" id="fg" class="w-full p-2 rounded">
+                        </div>
+                        <button id="calculateAbv" class="bg-light-green-600 text-white px-4 py-2 rounded hover:bg-light-green-700 transition duration-300">Berechnen</button>
+                        <p id="abvResult" class="mt-4 font-bold"></p>
+                    </div>
+                    <div class="bg-light-green-200 p-6 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-4">Weitere Tools</h3>
+                        <p>Weitere nützliche Brau-Tools folgen in Kürze!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-<section id="beers">
-    <h2>Unsere Biere</h2>
-    <img id="openPopup" src="iv_one.jpeg" alt="Klick mich!" width="150px">
-</section>
+    <footer class="bg-light-green-700 text-light-green-50 py-4">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2023 Vierlingsbräu. Alle Rechte vorbehalten.</p>
+            <p class="mt-2"><a href="#" class="hover:text-light-green-200 transition duration-300">Impressum</a></p>
+        </div>
+    </footer>
 
-
-<section id="tools">
-    <h2>Nützliche Tools</h2>
-    <p>Wir haben hier ein paar nützliche Tools für euch zusammengestellt, die euch beim Brauen helfen können.</p>
-    <p>Bald.</p>
-    <div id="popup">
-        <h2>IV.1</h2>
-        <p> Unsere Eins. Ein Helles. Kaltgehopft. </p>
-        <img src="iv_one.jpeg" width="250px" alt="Klick mich!">
-        <p>Alkoholgehalt: 5.0%</p>
-        <p>Stammwürze: 11.5°</p>
-        <button id="closePopup">X</button>
+    <div id="beerModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-light-green-50 p-8 rounded-lg max-w-2xl w-full mx-4">
+            <h2 id="modalTitle" class="text-3xl font-bold mb-4"></h2>
+            <img id="modalImage" class="w-full h-64 object-cover rounded-lg mb-4" src="" alt="">
+            <p id="modalDescription" class="mb-2"></p>
+            <p id="modalAlcohol" class="mb-2"></p>
+            <p id="modalGravity" class="mb-4"></p>
+        </div>
     </div>
 
-</section>
-
-<footer>
-    <p>Impressum</p>
-</footer>
-
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

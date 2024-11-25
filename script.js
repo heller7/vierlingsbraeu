@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        const abv = (og - fg) * 131.25;
+        const abv = (og*0.01 - fg*0.01) * 131.25;
         abvResult.textContent = `Alkoholgehalt: ${abv.toFixed(2)}%`;
     });
 });

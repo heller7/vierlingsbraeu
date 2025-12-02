@@ -30,7 +30,7 @@ const articlesData = [
     {
         id: 1,
         title: 'Die ersten Schritte beim Bierbrauen',
-        excerpt: 'Ein Leitfaden für Anfänger: Von der Planung bis zum ersten eigenen Bier.',
+        excerpt: 'Ein Leitfaden für Anfänger:innen Von der Planung bis zum ersten eigenen Bier.',
         content: `
             <h3 class="text-2xl font-bold text-light-green-800 mb-4">Die ersten Schritte beim Bierbrauen</h3>
             <p class="text-light-green-700 mb-4 leading-relaxed">

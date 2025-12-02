@@ -1,138 +1,617 @@
 <!DOCTYPE html>
 <html lang="de" class="scroll-smooth">
 <head>
+    <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vierlingsbräu</title>
+    <title>Vierlingsbräu - Hobbybrauerei aus dem Jagsttal</title>
+    <meta name="description" content="Willkommen bei Vierlingsbräu! Eine kleine Hobbybrauerei aus dem schönen Jagsttal. Wir brauen seit 2023 handgemachtes Bier mit viel Liebe und Sorgfalt.">
+    <meta name="keywords" content="Hobbybrauerei, Bier, Vierlingsbräu, Jagsttal, handgemacht, Bier brauen">
+    <meta name="author" content="Vierlingsbräu">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vierlingsbraeu.de/">
+    <meta property="og:title" content="Vierlingsbräu - Hobbybrauerei aus dem Jagsttal">
+    <meta property="og:description" content="Willkommen bei Vierlingsbräu! Eine kleine Hobbybrauerei aus dem schönen Jagsttal. Wir brauen seit 2023 handgemachtes Bier mit viel Liebe und Sorgfalt.">
+    <meta property="og:image" content="logo.jpeg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vierlingsbraeu.de/">
+    <meta property="twitter:title" content="Vierlingsbräu - Hobbybrauerei aus dem Jagsttal">
+    <meta property="twitter:description" content="Willkommen bei Vierlingsbräu! Eine kleine Hobbybrauerei aus dem schönen Jagsttal.">
+    <meta property="twitter:image" content="logo.jpeg">
+    
+    <!-- Favicon -->
     <link rel="icon" href="logo.ico" type="image/x-icon">
     <link rel="shortcut icon" href="logo.ico" type="image/x-icon">
+    
+    <!-- External Stylesheets -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'shadows': ['"Shadows Into Light"', 'cursive'],
-                    },
-                    colors: {
-                        'light-green': {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            200: '#bbf7d0',
-                            300: '#86efac',
-                            400: '#4ade80',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                            800: '#166534',
-                            900: '#14532d',
-                        },
-                    },
-                }
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Configuration -->
+    <script src="js/tailwind.config.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        /* Navigation Active State */
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #bbf7d0;
+            transform: scaleX(1);
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #bbf7d0;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+        
+        /* Modal Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
             }
         }
-    </script>
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .animate-scaleIn {
+            animation: scaleIn 0.3s ease-out;
+        }
+        
+        /* Smooth Scroll Behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f0fdf4;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #16a34a;
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #15803d;
+        }
+        
+        /* Mobile Menu Animation */
+        #mobileMenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        #mobileMenu:not(.hidden) {
+            max-height: 500px;
+        }
+        
+        /* Back to Top Button Animation */
+        #backToTop {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        #backToTop:hover {
+            transform: translateY(-3px) scale(1.1);
+        }
+    </style>
 </head>
-<body class="bg-light-green-50 text-light-green-900">
-    <header class="bg-light-green-700 text-light-green-50 fixed w-full z-10">
+<body class="bg-gradient-to-br from-light-green-50 via-white to-light-green-50 text-light-green-900 font-sans">
+    <!-- ============================================ -->
+    <!-- HEADER / NAVIGATION -->
+    <!-- ============================================ -->
+    <header class="bg-light-green-700 text-light-green-50 fixed w-full z-50 shadow-lg backdrop-blur-sm bg-opacity-95">
         <nav class="container mx-auto px-4 py-4">
-            <ul class="flex justify-center space-x-6">
-                <li><a href="#home" class="hover:text-light-green-200 transition duration-300">Home</a></li>
-                <li><a href="#beers" class="hover:text-light-green-200 transition duration-300">Unsere Biere</a></li>
-                <li><a href="#tools" class="hover:text-light-green-200 transition duration-300">Tools</a></li>
-            </ul>
+            <div class="flex items-center justify-between">
+                <a href="#home" class="flex items-center space-x-3 group">
+                    <img src="logo.jpeg" alt="Vierlingsbräu Logo" class="h-10 w-10 rounded-full object-cover ring-2 ring-light-green-300 group-hover:ring-light-green-200 transition-all">
+                    <span class="text-xl md:text-2xl font-shadows font-bold">Vierlingsbräu</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <ul class="hidden md:flex justify-center space-x-8">
+                    <li><a href="#home" class="nav-link hover:text-light-green-200 transition duration-300 relative py-2 px-1">Home</a></li>
+                    <li><a href="#beers" class="nav-link hover:text-light-green-200 transition duration-300 relative py-2 px-1">Unsere Biere</a></li>
+                    <li><a href="#articles" class="nav-link hover:text-light-green-200 transition duration-300 relative py-2 px-1">Brautipps</a></li>
+                    <li><a href="#about" class="nav-link hover:text-light-green-200 transition duration-300 relative py-2 px-1">Über uns</a></li>
+                    <li><a href="#tools" class="nav-link hover:text-light-green-200 transition duration-300 relative py-2 px-1">Tools</a></li>
+                    <li><a href="#contact" class="nav-link hover:text-light-green-200 transition duration-300 relative py-2 px-1">Kontakt</a></li>
+                </ul>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden text-light-green-50 hover:text-light-green-200 focus:outline-none transition-colors" aria-label="Menü öffnen" aria-expanded="false">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4">
+                <ul class="flex flex-col space-y-4">
+                    <li><a href="#home" class="mobile-nav-link block py-2 px-4 hover:bg-light-green-600 rounded-lg transition-colors">Home</a></li>
+                    <li><a href="#beers" class="mobile-nav-link block py-2 px-4 hover:bg-light-green-600 rounded-lg transition-colors">Unsere Biere</a></li>
+                    <li><a href="#articles" class="mobile-nav-link block py-2 px-4 hover:bg-light-green-600 rounded-lg transition-colors">Brautipps</a></li>
+                    <li><a href="#about" class="mobile-nav-link block py-2 px-4 hover:bg-light-green-600 rounded-lg transition-colors">Über uns</a></li>
+                    <li><a href="#tools" class="mobile-nav-link block py-2 px-4 hover:bg-light-green-600 rounded-lg transition-colors">Tools</a></li>
+                    <li><a href="#contact" class="mobile-nav-link block py-2 px-4 hover:bg-light-green-600 rounded-lg transition-colors">Kontakt</a></li>
+                </ul>
+            </div>
         </nav>
     </header>
 
+    <!-- ============================================ -->
+    <!-- MAIN CONTENT -->
+    <!-- ============================================ -->
+
     <main class="pt-16">
-        <section id="home" class="min-h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('brewery-bg.jpg');">
-            <div class="bg-light-green-800 bg-opacity-70 p-8 rounded-lg text-center">
-                <h1 class="text-6xl font-shadows text-light-green-50 mb-4">Vierlingsbräu</h1>
-                <p class="text-xl text-light-green-50 max-w-2xl">Willkommen auf der Website der Hobbybrauerei Vierlingsbräu! Wir sind eine kleine Hobbybrauerei aus dem schönen Jagsttal und brauen seit 2023 unser eigenes Bier in privaten Rahmen. Unsere Biere sind alle handgemacht und werden mit viel Liebe und Sorgfalt gebraut.</p>
-                <p class="text-2xl font-shadows text-light-green-200 mt-4">Prost! Die Vierlinge</p>
+        <!-- ============================================ -->
+        <!-- HERO SECTION / HOME -->
+        <!-- ============================================ -->
+        <section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-light-green-800 via-light-green-700 to-light-green-900 relative overflow-hidden">
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+            </div>
+            
+            <div class="relative z-10 bg-white bg-opacity-10 backdrop-blur-md p-12 rounded-2xl text-center shadow-2xl border border-white border-opacity-20 max-w-4xl mx-4 transform transition-all hover:scale-105 duration-500">
+                <div class="mb-6">
+                    <img src="logo.jpeg" alt="Vierlingsbräu Logo" class="h-24 w-24 rounded-full object-cover mx-auto ring-4 ring-light-green-300 shadow-lg mb-6" loading="eager">
+                </div>
+                <h1 class="text-7xl md:text-8xl font-shadows text-light-green-50 mb-6 drop-shadow-lg">Vierlingsbräu</h1>
+                <p class="text-xl md:text-2xl text-light-green-50 max-w-3xl mx-auto leading-relaxed mb-8">Willkommen auf der Website der Hobbybrauerei Vierlingsbräu! Wir sind eine kleine Hobbybrauerei aus dem schönen Jagsttal und brauen seit 2023 unser eigenes Bier in privaten Rahmen. Unsere Biere sind alle handgemacht und werden mit viel Liebe und Sorgfalt gebraut.</p>
+                <p class="text-3xl font-shadows text-light-green-200 mt-6">Prost! Die Vierlinge</p>
+                <a href="#beers" class="inline-block mt-8 bg-light-green-600 hover:bg-light-green-500 text-white font-semibold py-3 px-8 rounded-full shadow-lg transform transition-all hover:scale-110 duration-300">Unsere Biere entdecken</a>
             </div>
         </section>
 
-        <section id="beers" class="py-16 bg-light-green-100">
+        <!-- ============================================ -->
+        <!-- BEER SECTION -->
+        <!-- ============================================ -->
+
+        <section id="beers" class="py-20 bg-gradient-to-b from-light-green-50 to-white">
             <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-shadows text-center mb-8">Unsere Biere</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="beer-card" data-beer-id="1">
-                        <img src="iv_one.jpeg" alt="IV.1" class="w-full h-64 object-cover rounded-t-lg cursor-pointer">
-                        <div class="p-4 bg-light-green-200 rounded-b-lg">
-                            <h3 class="text-2xl font-bold mb-2">IV.1</h3>
-                            <p>Ein Helles. Kaltgehopft.</p>
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl md:text-6xl font-shadows text-light-green-800 mb-4">Unsere Biere</h2>
+                    <div class="w-24 h-1 bg-light-green-600 mx-auto rounded-full"></div>
+                    <p class="text-light-green-700 mt-6 text-lg max-w-2xl mx-auto">Handgemacht mit Leidenschaft im schönen Jagsttal</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <!-- Beer Card 1 -->
+                    <div class="beer-card group bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-soft transition-all duration-300 transform hover:-translate-y-2 cursor-pointer" data-beer-id="1">
+                        <div class="relative overflow-hidden">
+                            <img src="iv_one.jpeg" alt="IV.1" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <p class="text-sm font-semibold">Klicken für Details</p>
+                            </div>
+                        </div>
+                        <div class="p-6 bg-white">
+                            <h3 class="text-3xl font-bold mb-2 text-light-green-800">IV.1</h3>
+                            <p class="text-light-green-700 text-lg">Ein Helles. Kaltgehopft.</p>
                         </div>
                     </div>
-                    <div class="beer-card" data-beer-id="2">
-                        <img src="iv_two.jpeg" alt="IV.2" class="w-full h-64 object-cover rounded-t-lg cursor-pointer">
-                        <div class="p-4 bg-light-green-200 rounded-b-lg">
-                            <h3 class="text-2xl font-bold mb-2">IV.2</h3>
-                            <p>Ein Dunkles. Malzig und Vollmundig.</p>
+                    <!-- Beer Card 2 -->
+                    <div class="beer-card group bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-soft transition-all duration-300 transform hover:-translate-y-2 cursor-pointer" data-beer-id="2">
+                        <div class="relative overflow-hidden">
+                            <img src="iv_two.jpeg" alt="IV.2" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <p class="text-sm font-semibold">Klicken für Details</p>
+                            </div>
+                        </div>
+                        <div class="p-6 bg-white">
+                            <h3 class="text-3xl font-bold mb-2 text-light-green-800">IV.2</h3>
+                            <p class="text-light-green-700 text-lg">Ein Dunkles. Malzig und Vollmundig.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="tools" class="py-16">
+        <!-- ============================================ -->
+        <!-- TOOLS SECTION -->
+        <!-- ============================================ -->
+
+        <section id="tools" class="py-20 bg-white">
             <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-shadows text-center mb-8">Nützliche Tools</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-light-green-200 p-6 rounded-lg">
-                        <h3 class="text-2xl font-bold mb-4">Alkoholgehalt Rechner</h3>
-                        <div class="mb-4">
-                            <label for="og" class="block mb-2">Stammwürze (°P):</label>
-                            <input type="number" id="og" class="w-full p-2 rounded">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl md:text-6xl font-shadows text-light-green-800 mb-4">Nützliche Tools</h2>
+                    <div class="w-24 h-1 bg-light-green-600 mx-auto rounded-full"></div>
+                    <p class="text-light-green-700 mt-6 text-lg max-w-2xl mx-auto">Praktische Helfer für Hobbybrauer</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <!-- ABV Calculator Tool -->
+                    <div class="bg-gradient-to-br from-light-green-50 to-light-green-100 p-8 rounded-2xl shadow-card hover:shadow-soft transition-all duration-300 border border-light-green-200">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-light-green-600 text-white p-3 rounded-lg mr-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-5m-5 5h.01M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-light-green-800">Alkoholgehalt Rechner</h3>
                         </div>
                         <div class="mb-4">
-                            <label for="fg" class="block mb-2">Restextrakt (°P):</label>
-                            <input type="number" id="fg" class="w-full p-2 rounded">
+                            <label for="og" class="block mb-2 font-semibold text-light-green-700">Stammwürze (°P):</label>
+                            <input type="number" id="og" class="w-full p-3 rounded-lg border border-light-green-300 focus:ring-2 focus:ring-light-green-500 focus:border-transparent transition-all" step="0.1" min="0" placeholder="z.B. 12.0">
                         </div>
-                        <button id="calculateAbv" class="bg-light-green-600 text-white px-4 py-2 rounded hover:bg-light-green-700 transition duration-300">Berechnen</button>
-                        <p id="abvResult" class="mt-4 font-bold"></p>
+                        <div class="mb-6">
+                            <label for="fg" class="block mb-2 font-semibold text-light-green-700">Restextrakt (°P):</label>
+                            <input type="number" id="fg" class="w-full p-3 rounded-lg border border-light-green-300 focus:ring-2 focus:ring-light-green-500 focus:border-transparent transition-all" step="0.1" min="0" placeholder="z.B. 2.5">
+                        </div>
+                        <button id="calculateAbv" class="w-full bg-light-green-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-light-green-700 transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">Berechnen</button>
+                        <p id="abvResult" class="mt-6 font-bold text-lg text-center min-h-[2rem]"></p>
                     </div>
-                    <div class="bg-light-green-200 p-6 rounded-lg">
-                        <h3 class="text-2xl font-bold mb-4">Weitere Tools</h3>
-                        <p>Weitere nützliche Brau-Tools folgen in Kürze!</p>
+                    <!-- Placeholder for additional tools -->
+                    <div class="bg-gradient-to-br from-light-green-50 to-light-green-100 p-8 rounded-2xl shadow-card border border-light-green-200 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="bg-light-green-200 text-light-green-700 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-2 text-light-green-800">Weitere Tools</h3>
+                            <p class="text-light-green-700">Weitere nützliche Brau-Tools folgen in Kürze!</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="links" class="py-16">
+        <!-- ============================================ -->
+        <!-- ARTICLES / BLOG SECTION -->
+        <!-- ============================================ -->
+
+        <section id="articles" class="py-20 bg-white">
             <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-shadows text-center mb-8">Links</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <a href="https://www.brauerbund.org/" class="text-light-green-700 hover:text-light-green-900 transition duration-300">Brauerbund</a>
-                    <p>Homepage des Brauerbundes</p>
-                    <a href="https://www.hobbybrauerversand.de/" class="text-light-green-700 hover:text-light-green-900 transition duration-300">Hobbybrauerversand</a>
-                    <p>Online-Shop für Hobbybrauerbedarf</p>
-                    <a href="https://www.braufreude.de/" class="text-light-green-700 hover:text-light-green-900 transition duration-300">Braufreude</a>
-                    <p>Shop für Hobbybrauerbedarf</p>
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl md:text-6xl font-shadows text-light-green-800 mb-4">Brautipps & Anleitungen</h2>
+                    <div class="w-24 h-1 bg-light-green-600 mx-auto rounded-full"></div>
+                    <p class="text-light-green-700 mt-6 text-lg max-w-2xl mx-auto">Wissenswertes rund ums Bierbrauen</p>
+                </div>
+                <div id="articlesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                    <!-- Articles werden hier dynamisch eingefügt -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- LINKS SECTION -->
+        <!-- ============================================ -->
+
+        <section id="links" class="py-20 bg-gradient-to-b from-white to-light-green-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl md:text-6xl font-shadows text-light-green-800 mb-4">Nützliche Links</h2>
+                    <div class="w-24 h-1 bg-light-green-600 mx-auto rounded-full"></div>
+                    <p class="text-light-green-700 mt-6 text-lg max-w-2xl mx-auto">Empfehlungen für Hobbybrauer</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                    <a href="https://www.brauerbund.org/" target="_blank" rel="noopener noreferrer" class="group bg-white p-6 rounded-xl shadow-card hover:shadow-soft transition-all duration-300 transform hover:-translate-y-1 border border-light-green-200">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-light-green-100 p-3 rounded-lg group-hover:bg-light-green-200 transition-colors">
+                                <svg class="w-6 h-6 text-light-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-light-green-800 group-hover:text-light-green-600 transition-colors">Brauerbund</h3>
+                        </div>
+                        <p class="text-light-green-700">Homepage des Brauerbundes</p>
+                    </a>
+                    <a href="https://www.hobbybrauerversand.de/" target="_blank" rel="noopener noreferrer" class="group bg-white p-6 rounded-xl shadow-card hover:shadow-soft transition-all duration-300 transform hover:-translate-y-1 border border-light-green-200">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-light-green-100 p-3 rounded-lg group-hover:bg-light-green-200 transition-colors">
+                                <svg class="w-6 h-6 text-light-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-light-green-800 group-hover:text-light-green-600 transition-colors">Hobbybrauerversand</h3>
+                        </div>
+                        <p class="text-light-green-700">Online-Shop für Hobbybrauerbedarf</p>
+                    </a>
+                    <a href="https://www.braufreude.de/" target="_blank" rel="noopener noreferrer" class="group bg-white p-6 rounded-xl shadow-card hover:shadow-soft transition-all duration-300 transform hover:-translate-y-1 border border-light-green-200">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-light-green-100 p-3 rounded-lg group-hover:bg-light-green-200 transition-colors">
+                                <svg class="w-6 h-6 text-light-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-light-green-800 group-hover:text-light-green-600 transition-colors">Braufreude</h3>
+                        </div>
+                        <p class="text-light-green-700">Shop für Hobbybrauerbedarf</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- ABOUT SECTION -->
+        <!-- ============================================ -->
+
+        <section id="about" class="py-20 bg-gradient-to-b from-light-green-50 to-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl md:text-6xl font-shadows text-light-green-800 mb-4">Über uns</h2>
+                    <div class="w-24 h-1 bg-light-green-600 mx-auto rounded-full"></div>
+                </div>
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-white rounded-2xl shadow-card p-8 md:p-12">
+                        <div class="flex flex-col md:flex-row items-center mb-8">
+                            <img src="logo.jpeg" alt="Vierlingsbräu Logo" class="h-32 w-32 rounded-full object-cover ring-4 ring-light-green-300 shadow-lg mb-6 md:mb-0 md:mr-8">
+                            <div class="text-center md:text-left">
+                                <h3 class="text-3xl font-shadows text-light-green-800 mb-4">Vierlingsbräu</h3>
+                                <p class="text-lg text-light-green-700">Hobbybrauerei aus dem schönen Jagsttal</p>
+                            </div>
+                        </div>
+                        <div class="prose prose-lg max-w-none">
+                            <p class="text-light-green-800 leading-relaxed mb-4">
+                                Willkommen bei Vierlingsbräu! Wir sind eine kleine, leidenschaftliche Hobbybrauerei aus dem idyllischen Jagsttal. 
+                                Seit 2023 widmen wir uns der Kunst des Bierbrauens und kreieren handgemachte Biere mit viel Liebe zum Detail.
+                            </p>
+                            <p class="text-light-green-800 leading-relaxed mb-4">
+                                Unsere Brauerei entstand aus der gemeinsamen Leidenschaft für gutes Bier und dem Wunsch, selbst zu experimentieren 
+                                und zu kreieren. Jedes unserer Biere wird in kleinen Chargen gebraut, was uns die Möglichkeit gibt, 
+                                höchste Qualität und individuelle Geschmacksprofile zu gewährleisten.
+                            </p>
+                            <p class="text-light-green-800 leading-relaxed mb-4">
+                                Wir verwenden nur hochwertige Zutaten und achten auf traditionelle Braumethoden, die wir mit modernen 
+                                Techniken kombinieren. Unser Ziel ist es, Biere zu brauen, die nicht nur schmecken, sondern auch 
+                                Geschichten erzählen.
+                            </p>
+                            <div class="mt-8 pt-8 border-t border-light-green-200">
+                                <h4 class="text-2xl font-bold text-light-green-800 mb-4">Unsere Werte</h4>
+                                <ul class="space-y-3 text-light-green-700">
+                                    <li class="flex items-start">
+                                        <svg class="w-6 h-6 text-light-green-600 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span>Qualität steht über Quantität - jede Charge wird mit Sorgfalt gebraut</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-6 h-6 text-light-green-600 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span>Traditionelle Braumethoden kombiniert mit modernen Techniken</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-6 h-6 text-light-green-600 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span>Leidenschaft und Experimentierfreude bei jedem Brauvorgang</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <svg class="w-6 h-6 text-light-green-600 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span>Gemeinschaft und Austausch mit anderen Hobbybrauern</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- CONTACT SECTION -->
+        <!-- ============================================ -->
+
+        <section id="contact" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl md:text-6xl font-shadows text-light-green-800 mb-4">Kontakt</h2>
+                    <div class="w-24 h-1 bg-light-green-600 mx-auto rounded-full"></div>
+                    <p class="text-light-green-700 mt-6 text-lg max-w-2xl mx-auto">Wir freuen uns auf deine Nachricht!</p>
+                </div>
+                <div class="max-w-4xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Contact Info -->
+                        <div class="bg-gradient-to-br from-light-green-50 to-light-green-100 rounded-2xl p-8 shadow-card">
+                            <h3 class="text-2xl font-bold text-light-green-800 mb-6">Kontaktinformationen</h3>
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="bg-light-green-600 text-white p-3 rounded-lg mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-light-green-800 mb-1">Standort</h4>
+                                        <p class="text-light-green-700">Jagsttal, Deutschland</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-light-green-600 text-white p-3 rounded-lg mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-light-green-800 mb-1">E-Mail</h4>
+                                        <a href="mailto:kontakt@vierlingsbraeu.de" class="text-light-green-700 hover:text-light-green-900 transition-colors">kontakt@vierlingsbraeu.de</a>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-light-green-600 text-white p-3 rounded-lg mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-light-green-800 mb-1">Erreichbarkeit</h4>
+                                        <p class="text-light-green-700">Nach Vereinbarung</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Form -->
+                        <div class="bg-white rounded-2xl p-8 shadow-card border border-light-green-200">
+                            <h3 class="text-2xl font-bold text-light-green-800 mb-6">Nachricht senden</h3>
+                            <form id="contactForm" class="space-y-4">
+                                <div>
+                                    <label for="contactName" class="block mb-2 font-semibold text-light-green-700">Name</label>
+                                    <input type="text" id="contactName" name="name" required class="w-full p-3 rounded-lg border border-light-green-300 focus:ring-2 focus:ring-light-green-500 focus:border-transparent transition-all" placeholder="Dein Name">
+                                </div>
+                                <div>
+                                    <label for="contactEmail" class="block mb-2 font-semibold text-light-green-700">E-Mail</label>
+                                    <input type="email" id="contactEmail" name="email" required class="w-full p-3 rounded-lg border border-light-green-300 focus:ring-2 focus:ring-light-green-500 focus:border-transparent transition-all" placeholder="deine@email.de">
+                                </div>
+                                <div>
+                                    <label for="contactSubject" class="block mb-2 font-semibold text-light-green-700">Betreff</label>
+                                    <input type="text" id="contactSubject" name="subject" required class="w-full p-3 rounded-lg border border-light-green-300 focus:ring-2 focus:ring-light-green-500 focus:border-transparent transition-all" placeholder="Betreff">
+                                </div>
+                                <div>
+                                    <label for="contactMessage" class="block mb-2 font-semibold text-light-green-700">Nachricht</label>
+                                    <textarea id="contactMessage" name="message" rows="5" required class="w-full p-3 rounded-lg border border-light-green-300 focus:ring-2 focus:ring-light-green-500 focus:border-transparent transition-all resize-none" placeholder="Deine Nachricht..."></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-light-green-600 hover:bg-light-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
+                                    Nachricht senden
+                                </button>
+                                <p id="contactFormMessage" class="text-center text-sm mt-4"></p>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-light-green-700 text-light-green-50 py-4">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2023 Vierlingsbräu. Alle Rechte vorbehalten.</p>
-            <p class="mt-2"><a href="#" class="hover:text-light-green-200 transition duration-300">Impressum</a></p>
+    <!-- ============================================ -->
+    <!-- FOOTER -->
+    <!-- ============================================ -->
+
+    <footer class="bg-gradient-to-br from-light-green-800 to-light-green-900 text-light-green-50 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-2xl font-shadows mb-4">Vierlingsbräu</h3>
+                    <p class="text-light-green-200">Hobbybrauerei aus dem schönen Jagsttal</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Navigation</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-light-green-200 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#beers" class="text-light-green-200 hover:text-white transition-colors">Unsere Biere</a></li>
+                        <li><a href="#articles" class="text-light-green-200 hover:text-white transition-colors">Brautipps</a></li>
+                        <li><a href="#about" class="text-light-green-200 hover:text-white transition-colors">Über uns</a></li>
+                        <li><a href="#tools" class="text-light-green-200 hover:text-white transition-colors">Tools</a></li>
+                        <li><a href="#contact" class="text-light-green-200 hover:text-white transition-colors">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Rechtliches</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-light-green-200 hover:text-white transition-colors">Impressum</a></li>
+                        <li><a href="#" class="text-light-green-200 hover:text-white transition-colors">Datenschutz</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-light-green-600 pt-8 text-center">
+                <p>&copy; <span id="currentYear">2023</span> Vierlingsbräu. Alle Rechte vorbehalten.</p>
+            </div>
         </div>
     </footer>
 
-    <div id="beerModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-        <div class="bg-light-green-50 p-8 rounded-lg max-w-2xl w-full mx-4">
-            <h2 id="modalTitle" class="text-3xl font-bold mb-4"></h2>
-            <img id="modalImage" class="w-full h-64 object-cover rounded-lg mb-4" src="" alt="">
-            <p id="modalDescription" class="mb-2"></p>
-            <p id="modalAlcohol" class="mb-2"></p>
-            <p id="modalGravity" class="mb-4"></p>
+    <!-- ============================================ -->
+    <!-- BACK TO TOP BUTTON -->
+    <!-- ============================================ -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-light-green-600 hover:bg-light-green-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 opacity-0 pointer-events-none z-40" aria-label="Nach oben scrollen">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <!-- ============================================ -->
+    <!-- MODALS -->
+    <!-- ============================================ -->
+    <!-- Beer Detail Modal -->
+    <div id="beerModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4 animate-fadeIn">
+        <div class="bg-white p-8 rounded-2xl max-w-2xl w-full mx-4 relative shadow-2xl transform transition-all animate-scaleIn">
+            <button id="modalCloseBtn" class="absolute top-4 right-4 text-light-green-700 hover:text-light-green-900 text-3xl font-bold leading-none w-10 h-10 flex items-center justify-center rounded-full hover:bg-light-green-100 transition-all" aria-label="Modal schließen">&times;</button>
+            <div class="pr-8">
+                <h2 id="modalTitle" class="text-4xl font-bold mb-2 text-light-green-800"></h2>
+                <div class="w-16 h-1 bg-light-green-600 rounded-full mb-6"></div>
+            </div>
+            <img id="modalImage" class="w-full h-80 object-cover rounded-xl mb-6 shadow-lg" src="" alt="" loading="lazy">
+            <div class="space-y-4">
+                <p id="modalDescription" class="text-lg text-light-green-700 leading-relaxed"></p>
+                <div class="flex items-center space-x-6 pt-4 border-t border-light-green-200">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-light-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <p id="modalAlcohol" class="font-semibold text-light-green-800"></p>
+                    </div>
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-light-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                        <p id="modalGravity" class="font-semibold text-light-green-800"></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Article Detail Modal -->
+    <div id="articleModal" class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4 animate-fadeIn overflow-y-auto">
+        <div class="bg-white p-8 rounded-2xl max-w-4xl w-full mx-4 my-8 relative shadow-2xl transform transition-all animate-scaleIn">
+            <button id="articleModalCloseBtn" class="absolute top-4 right-4 text-light-green-700 hover:text-light-green-900 text-3xl font-bold leading-none w-10 h-10 flex items-center justify-center rounded-full hover:bg-light-green-100 transition-all z-10" aria-label="Modal schließen">&times;</button>
+            <div id="articleModalContent" class="pr-8">
+                <!-- Content wird dynamisch eingefügt -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================ -->
+    <!-- Main Application Script (funktioniert auch ohne Server) -->
+    <script src="js/app.js"></script>
 </body>
 </html>
